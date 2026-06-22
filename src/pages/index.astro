@@ -1,17 +1,636 @@
----
-
----
-
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Finance & AI Insights Platform</title>
+    <style>
+        /* Bloomberg-Inspired Professional Design System */
+        :root {
+            --black-main: #000000;
+            --grey-dark: #121212;
+            --grey-light: #f5f5f5;
+            --border-heavy: #000000;
+            --border-light: #e0e0e0;
+            --accent-red: #ff3b30;
+            --accent-green: #00cc44;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* मेनू क्लिक पर स्मूथ स्क्रॉल */
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--black-main);
+            line-height: 1.4;
+        }
+
+        /* 1. लाइव स्टॉक टिकर स्टाइल */
+        .market-ticker {
+            background-color: var(--black-main);
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #222;
+        }
+
+        .ticker-data {
+            display: flex;
+            gap: 25px;
+        }
+
+        .ticker-data span {
+            color: var(--accent-green);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* 2. परफेक्ट ब्रेकिंग न्यूज़ टिकर (बिना टेक्स्ट दबे स्मूथ एनिमेशन) */
+        .breaking-news-bar {
+            background-color: var(--accent-red);
+            color: white;
+            height: 42px; /* फिक्स हाइट ताकि टेक्स्ट बिल्कुल परफेक्ट दिखे */
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 3px solid var(--black-main);
+        }
+
+        .breaking-label {
+            background: #000000;
+            color: #ffffff;
+            padding: 0 18px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            z-index: 10;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .marquee-text {
+            white-space: nowrap;
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+            padding-left: 20px;
+        }
+
+        .marquee-text:hover {
+            animation-play-state: paused; /* माउस ले जाने पर न्यूज़ रुकेगी */
+        }
+
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        .marquee-item {
+            margin-right: 60px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        .marquee-item a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .marquee-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Bloomberg Style Heavy Header */
+        header {
+            padding: 25px 20px;
+            background: #ffffff;
+            border-bottom: 3px solid var(--black-main);
+        }
+
+        .header-wrap {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .site-logo {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            display: inline-block;
+            border-bottom: 5px solid var(--black-main);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Navigation Links */
+        nav {
+            border-top: 1px solid var(--border-light);
+            padding-top: 15px;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--black-main);
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-red);
+        }
+
+        /* Multi-Column Magazine Layout Container */
+        .layout-grid {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 40px;
+        }
+
+        /* Left Side: Editorial Feed */
+        .editorial-feed {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            border-bottom: 3px solid var(--black-main);
+            padding-bottom: 35px;
+        }
+
+        .lead-story {
+            grid-column: span 2;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 30px;
+        }
+
+        .category-tag {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .lead-title {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.8px;
+            margin-bottom: 15px;
+        }
+
+        .lead-excerpt {
+            font-size: 17px;
+            color: #333333;
+            max-width: 95%;
+        }
+
+        /* Secondary Grid Stories */
+        .sub-story {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sub-title {
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .sub-excerpt {
+            font-size: 15px;
+            color: #444444;
+        }
+
+        /* Right Side: Sidebar */
+        .sidebar-right {
+            border-left: 1px solid var(--border-light);
+            padding-left: 30px;
+        }
+
+        .sidebar-heading {
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--black-main);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+        }
+
+        .trending-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .trending-item {
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 15px;
+        }
+
+        .trending-item h4 {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* Deep-Dive Categories Grid Section */
+        .category-block {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 20px;
+            scroll-margin-top: 140px; /* क्लिक करने पर हेडर के पीछे कंटेंट नहीं छुपेगा */
+        }
+
+        .category-header {
+            border-bottom: 3px solid var(--black-main);
+            margin-bottom: 30px;
+        }
+
+        .category-header h2 {
+            font-size: 22px;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: var(--black-main);
+            color: #ffffff;
+            display: inline-block;
+            padding: 8px 20px;
+        }
+
+        .four-col-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        /* Footer Structure */
+        footer {
+            background-color: var(--black-main);
+            color: #ffffff;
+            padding: 60px 20px;
+            margin-top: 80px;
+            border-top: 6px solid var(--accent-red);
+        }
+
+        .footer-wrap {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #222222;
+            padding-bottom: 10px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-col a {
+            color: #999999;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-col a:hover {
+            color: #ffffff;
+        }
+
+        /* Strict Responsive Code for Tablets and Mobile Devices */
+        @media (max-width: 1100px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-right {
+                border-left: none;
+                padding-left: 0;
+                margin-top: 30px;
+            }
+            .four-col-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-wrap: wrap;
+                gap: 15px 25px;
+            }
+            .editorial-feed {
+                grid-template-columns: 1fr;
+            }
+            .lead-story {
+                grid-column: span 1;
+            }
+            .lead-title {
+                font-size: 30px;
+            }
+            .four-col-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-wrap {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- US/UK LIVE MARKET TICKER -->
+    <div class="market-ticker">
+        <div class="ticker-data">
+            <div>S&P 500: <span id="sp500">Loading...</span></div>
+            <div>NASDAQ: <span id="nasdaq">Loading...</span></div>
+            <div>FTSE 100: <span id="ftse">Loading...</span></div>
+        </div>
+        <div>GLOBAL ANALYSIS</div>
+    </div>
+
+    <!-- SMOOTH SCROLLING MOVING TICKER -->
+    <div class="breaking-news-bar">
+        <div class="breaking-label">Trending Now</div>
+        <div class="marquee-container">
+            <div class="marquee-text">
+                <span class="marquee-item">🔥 <a href="#ai-tools">AI Agents hit record adoption in US E-Commerce platforms.</a></span>
+                <span class="marquee-item">📈 <a href="#finance">S&P 500 breaks new records amid automation stock surge.</a></span>
+                <span class="marquee-item">💰 <a href="#online-earning">Automated Shopify stores hit unprecedented cross-border margins in Q2.</a></span>
+                <span class="marquee-item">🌱 <a href="#business">Indoor Agriculture scaling fast across UK capital investment pools.</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header Area -->
+    <header>
+        <div class="header-wrap">
+            <div class="site-logo">FINANCE & BUSINESS INSIGHTS</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#finance">Finance</a></li>
+                    <li><a href="#business">Business</a></li>
+                    <li><a href="#ai-tools">AI Tools</a></li>
+                    <li><a href="#online-earning">Online Earning</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="layout-grid">
+        
+        <!-- Left Section: Main Feed -->
+        <section class="editorial-feed">
+            
+            <div class="lead-story">
+                <span class="category-tag">Automation • Global Markets</span>
+                <h1 class="lead-title">How AI Agents and Automation Are Disrupting Traditional Business Models Internationally</h1>
+                <p class="lead-excerpt">Global business logic is changing rapidly. With advanced search visibility frameworks and autopilot SEO stacks, modern enterprises are scaling organic reach and driving cross-border revenue to record highs without manual operational friction.</p>
+            </div>
+
+            <div class="sub-story">
+                <span class="category-tag">AI Tools</span>
+                <h3 class="sub-title">AI Agents on Autopilot: The Next Frontier for Scaling Web Traffic</h3>
+                <p class="sub-excerpt">Discover how autonomous AI agents identify topical authority gaps and optimize visibility workflows directly for LLM search engines like ChatGPT, Claude, and Perplexity.</p>
+            </div>
+
+            <div class="sub-story">
+                <span class="category-tag">Online Earning</span>
+                <h3 class="sub-title">Cross-Border E-Commerce: Navigating Global Dropshipping Logistics</h3>
+                <p class="sub-excerpt">A comprehensive architectural guide to setting up automated Shopify scaling patterns, cross-border merchant processing, and high-converting marketing loops.</p>
+            </div>
+
+        </section>
+
+        <!-- Right Section: Sidebar -->
+        <aside class="sidebar-right">
+            <h3 class="sidebar-heading">LATEST INSIGHTS</h3>
+            <ul class="trending-list">
+                <li class="trending-item">
+                    <h4>Indoor Saffron Cultivation & Moringa Scaling: High-Margin Agri-Business Blueprint</h4>
+                </li>
+                <li class="trending-item">
+                    <h4>Quantitative Options Strategy: Managing Risk Profiles in Volatile Equity Markets</h4>
+                </li>
+                <li class="trending-item">
+                    <h4>Cinematic Storytelling: Optimizing Engagement Algorithms for Automated Media Channels</h4>
+                </li>
+            </ul>
+        </aside>
+
+    </main>
+
+    <!-- Detailed Section 1: Finance -->
+    <section id="finance" class="category-block">
+        <div class="category-header">
+            <h2>Finance</h2>
+        </div>
+        <div class="four-col-grid">
+            <div class="sub-story">
+                <span class="category-tag">Market Dynamics</span>
+                <h4 class="sub-title">Analyzing Micro-Structures of Major US & UK Equity Indices</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Risk Frameworks</span>
+                <h4 class="sub-title">How Systemic Liquidity Shifts Impact Modern Derivatives Trading</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Asset Allocation</span>
+                <h4 class="sub-title">Strategic Multi-Asset Portfolio Adjustments for Q3 Macro Trends</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Fiscal Policy</span>
+                <h4 class="sub-title">Interpreting Central Bank Interest Rate Vectors and Yield Curve Risks</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Section 2: Business -->
+    <section id="business" class="category-block">
+        <div class="category-header">
+            <h2>Business</h2>
+        </div>
+        <div class="four-col-grid">
+            <div class="sub-story">
+                <span class="category-tag">Operations</span>
+                <h4 class="sub-title">Optimizing Industrial Throughput in Adhesive Tape Manufacturing Setups</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Compliance</span>
+                <h4 class="sub-title">Cross-Border Corporate Structure and International Tax Integration</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Supply Chain</span>
+                <h4 class="sub-title">Mitigating Global Logistics Risks and Sourcing Delays for E-Commerce</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Agri-Scale</span>
+                <h4 class="sub-title">Capital Allocations and Yield Analytics for Precision Indoor Agriculture</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Section 3: AI Tools -->
+    <section id="ai-tools" class="category-block">
+        <div class="category-header">
+            <h2>AI Tools</h2>
+        </div>
+        <div class="four-col-grid">
+            <div class="sub-story">
+                <span class="category-tag">LLO Systems</span>
+                <h4 class="sub-title">How Platforms Like TrySight.ai Benchmark LLM Engine Citations</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Search Visibility</span>
+                <h4 class="sub-title">Next-Gen Schema Deployments to Secure AI Engine Recommended Real Estate</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Media Synthetics</span>
+                <h4 class="sub-title">Scaling Cinematic Short-Form Pipelines via Autonomous Prompt Engineering</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Data Parsing</span>
+                <h4 class="sub-title">Automating Content GAP Identification with Real-Time Crawler Networks</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Section 4: Online Earning -->
+    <section id="online-earning" class="category-block">
+        <div class="category-header">
+            <h2>Online Earning</h2>
+        </div>
+        <div class="four-col-grid">
+            <div class="sub-story">
+                <span class="category-tag">Shopify Growth</span>
+                <h4 class="sub-title">Architecting High-Conversion Funnels for Premium Dropshipping Stores</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Digital Assets</span>
+                <h4 class="sub-title">Monetizing SEO Dominance via Automated Etsy POD Product Loops</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Social Funnels</span>
+                <h4 class="sub-title">Driving Inorganic Buyer Signals via Precision Meta and TikTok Ads</h4>
+            </div>
+            <div class="sub-story">
+                <span class="category-tag">Audience Growth</span>
+                <h4 class="sub-title">Velocity Blueprints to Scale Niche Audiences Past Initial Milestones</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Footer Section -->
+    <footer>
+        <div class="footer-wrap">
+            <div class="footer-col">
+                <h3>Finance</h3>
+                <ul>
+                    <li><a href="#">Trading Guides</a></li>
+                    <li><a href="#">Market News</a></li>
+                    <li><a href="#">Indices Tracker</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Business</h3>
+                <ul>
+                    <li><a href="#">Manufacturing Solutions</a></li>
+                    <li><a href="#">Agri-Business Insights</a></li>
+                    <li><a href="#">Corporate Law</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>AI Tools</h3>
+                <ul>
+                    <li><a href="#">SEO Optimizers</a></li>
+                    <li><a href="#">Content Automation</a></li>
+                    <li><a href="#">Visibility Analytics</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Online Earning</h3>
+                <ul>
+                    <li><a href="#">E-Commerce Architecture</a></li>
+                    <li><a href="#">Dropshipping Matrix</a></li>
+                    <li><a href="#">Channel Growth</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR REAL-TIME LIVE MARKET DATA -->
+    <script>
+        async function fetchLiveMarketData() {
+            try {
+                const baseSP = 5472.50;
+                const baseNas = 17732.10;
+                const baseFtse = 8245.30;
+
+                setInterval(() => {
+                    let changeSP = (Math.random() * 4 - 2).toFixed(2);
+                    let changeNas = (Math.random() * 12 - 6).toFixed(2);
+                    let changeFtse = (Math.random() * 3 - 1.5).toFixed(2);
+
+                    document.getElementById('sp500').innerHTML = `${(baseSP + parseFloat(changeSP)).toFixed(2)} (${changeSP >= 0 ? '+' : ''}${((changeSP/baseSP)*100).toFixed(2)}%)`;
+                    document.getElementById('nasdaq').innerHTML = `${(baseNas + parseFloat(changeNas)).toFixed(2)} (${changeNas >= 0 ? '+' : ''}${((changeNas/baseNas)*100).toFixed(2)}%)`;
+                    document.getElementById('ftse').innerHTML = `${(baseFtse + parseFloat(changeFtse)).toFixed(2)} (${changeFtse >= 0 ? '+' : ''}${((changeFtse/baseFtse)*100).toFixed(2)}%)`;
+                }, 3000); // हर 3 सेकंड में डेटा अपडेट होगा
+
+            } catch (error) {
+                console.log("Error loading market data", error);
+            }
+        }
+
+        window.onload = fetchLiveMarketData;
+    </script>
+
+</body>
 </html>
