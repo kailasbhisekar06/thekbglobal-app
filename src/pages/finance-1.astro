@@ -1,33 +1,25 @@
 ---
+import MainLayout from '../layouts/MainLayout.astro';
 const title = "Analyzing Micro-Structures of Major US & UK Equity Indices";
 const publishDate = "June 23, 2026";
 ---
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #000; font-size: 2.2rem; margin-bottom: 10px; }
-        .meta { color: #666; font-style: italic; margin-bottom: 30px; }
-        article p { margin-bottom: 20px; }
-        h2 { margin-top: 40px; color: #000; border-left: 5px solid #000; padding-left: 15px; }
-    </style>
-</head>
-<body>
-    <a href="/">← Back to Home</a>
+
+<MainLayout title={title}>
     <h1>{title}</h1>
     <p class="meta">Published on {publishDate} | By Kailash Bhisekar</p>
     <img src="/finance-1.jpg" alt="Finance Article" style="width: 100%; border-radius: 12px; margin-bottom: 20px;">
+    
     <article>
         <p>Modern equity indices like the S&P 500 and the FTSE 100 have evolved beyond simple baskets of stocks. Today, they function as complex ecosystems dominated by high-frequency trading (HFT) and institutional algorithm flows. For the average retail trader, understanding these micro-structures is no longer optional—it is a survival skill.</p>
 
         <h2>The Velocity of Price Discovery</h2>
-        <p>Price discovery now happens in milliseconds. Institutional players utilize dark pools and fragmented liquidity sources to execute massive orders without triggering market volatility. <strong>[Many retail traders enter the Nifty 50, Sensex, and Bank Nifty markets by following the trades or signals of large traders and influencers. Unfortunately, this often leads to losses because they rely on others instead of developing their own understanding of the market.
-A trader may make profits for one day, two days, or even several consecutive days. However, without proper risk management, discipline, and a well-tested strategy, a single bad trade can wipe out weeks or even months of gains.
-In my experience, consistent profitability in trading is not achieved through shortcuts or blindly following others. It requires strong market knowledge, continuous research, disciplined execution, proper target setting, and extensive testing of trading strategies.
-Successful trading is a long-term skill that takes time to develop. Without patience, experience, and a structured approach, it is difficult to remain profitable in the financial markets...."]</strong></p>
+        <p>Price discovery now happens in milliseconds. Institutional players utilize dark pools and fragmented liquidity sources to execute massive orders without triggering market volatility. Many retail traders enter the Nifty 50, Sensex, and Bank Nifty markets by following the trades or signals of large traders and influencers. Unfortunately, this often leads to losses because they rely on others instead of developing their own understanding of the market.</p>
+        
+        <p>A trader may make profits for one day, two days, or even several consecutive days. However, without proper risk management, discipline, and a well-tested strategy, a single bad trade can wipe out weeks or even months of gains.</p>
+        
+        <p>In my experience, consistent profitability in trading is not achieved through shortcuts or blindly following others. It requires strong market knowledge, continuous research, disciplined execution, proper target setting, and extensive testing of trading strategies.</p>
+        
+        <p>Successful trading is a long-term skill that takes time to develop. Without patience, experience, and a structured approach, it is difficult to remain profitable in the financial markets.</p>
 
         <h2>Navigating Liquidity Voids</h2>
         <p>Market depth is often an illusion. When you look at an order book, you are seeing a snapshot, not the full picture. To succeed, traders must learn to track "liquidity voids"—areas where the market is thin—and anticipate how price reacts when it fills those gaps.</p>
@@ -37,5 +29,4 @@ Successful trading is a long-term skill that takes time to develop. Without pati
         
         <p><strong>Conclusion:</strong> Markets are becoming increasingly automated. If you are not using data to drive your decisions, you are not trading; you are gambling. Start small, track the indices, and let the data tell the story.</p>
     </article>
-</body>
-</html>
+</MainLayout>
