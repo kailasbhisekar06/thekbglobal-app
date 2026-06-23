@@ -1,6 +1,6 @@
 ---
-// हमने यहाँ 'description' जोड़ दिया है ताकि हर पेज की SEO अच्छी हो सके
-const { title, description = "Finance, Business, and AI Insights by The KB Global." } = Astro.props;
+// SEO और AdSense के लिए फाइनल अपडेटेड लेआउट
+const { title, description = "Finance, Business, AI Tools, and Online Earning Insights by The KB Global." } = Astro.props;
 ---
 
 <html lang="en">
@@ -15,10 +15,11 @@ const { title, description = "Finance, Business, and AI Insights by The KB Globa
     
     <nav style="text-align: center; padding: 20px 0; border-bottom: 2px solid #000; background: #fff;">
         <a href="/" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">Home</a>
-        <!-- यहाँ से # हटा दिया गया है ताकि असली पेजेज खुलें -->
         <a href="/finance" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">Finance</a>
         <a href="/business" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">Business</a>
         <a href="/ai-tools" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">AI Tools</a>
+        <!-- Online Earning का लिंक जोड़ा गया -->
+        <a href="/online-earning" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">Online Earning</a>
     </nav>
 
     <main style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
@@ -27,11 +28,12 @@ const { title, description = "Finance, Business, and AI Insights by The KB Globa
     </main>
 
     <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; color: #666;">
-        <!-- AdSense अप्रूवल के लिए ज़रूरी लिंक्स (नये जोड़े गए) -->
+        <!-- AdSense अप्रूवल के लिए सभी ज़रूरी 4 लिंक्स -->
         <div style="margin-bottom: 15px;">
             <a href="/about" style="margin: 0 10px; color: #666; text-decoration: underline;">About Us</a>
             <a href="/privacy-policy" style="margin: 0 10px; color: #666; text-decoration: underline;">Privacy Policy</a>
-            <a href="/contact" style="margin: 0 10px; color: #666; text-decoration: underline;">Contact</a>
+            <a href="/terms" style="margin: 0 10px; color: #666; text-decoration: underline;">Terms of Service</a>
+            <a href="/contact" style="margin: 0 10px; color: #666; text-decoration: underline;">Contact Us</a>
         </div>
         <p>&copy; 2026 Kailash Bhisekar. All Rights Reserved.</p>
     </footer>
