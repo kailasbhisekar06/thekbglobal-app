@@ -1,0 +1,26 @@
+---
+const { title } = Astro.props;
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+</head>
+<body style="margin: 0; font-family: sans-serif;">
+    <nav style="text-align: center; padding: 20px 0; border-bottom: 2px solid #000; background: #fff;">
+        <a href="/" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">HOME</a>
+        <a href="/#finance" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">FINANCE</a>
+        <a href="/#business" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">BUSINESS</a>
+        <a href="/#ai-tools" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">AI TOOLS</a>
+    </nav>
+
+    <main style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+        <slot />
+    </main>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; color: #666;">
+        <p>&copy; 2026 Kailash Bhisekar. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
