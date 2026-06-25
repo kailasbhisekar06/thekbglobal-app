@@ -1,24 +1,10 @@
----
-import { getCollection } from 'astro:content';
-
-// 1. blog फ़ोल्डर से सारे आर्टिकल्स अपने आप खींचना
-const allPosts = await getCollection('blog');
-
-// 2. आर्टिकल्स को तारीख के हिसाब से सेट करना (नया आर्टिकल सबसे ऊपर आएगा)
-const sortedPosts = allPosts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
-
-// 3. होमपेज के अलग-अलग हिस्सों के लिए आर्टिकल्स बांटना
-const leadStory = sortedPosts[0]; // सबसे नया आर्टिकल (Lead Story)
-const subStories = sortedPosts.slice(1, 3); // उसके बाद के 2 आर्टिकल्स
-const remainingStories = sortedPosts.slice(3); // बाकी बचे हुए सारे आर्टिकल्स
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Finance & AI Insights Platform</title>
+    <!-- Favicon Added -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <style>
         :root {
@@ -31,73 +17,284 @@ const remainingStories = sortedPosts.slice(3); // बाकी बचे हु�
             --accent-green: #00cc44;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background-color: #ffffff; color: var(--black-main); line-height: 1.4; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--black-main);
+            line-height: 1.4;
+        }
+
+        /* 1. लाइव स्टॉक टिकर स्टाइल */
         .market-ticker {
-            background-color: var(--black-main); color: #ffffff; padding: 10px 20px;
-            font-size: 12px; font-weight: 700; letter-spacing: 1px;
-            display: flex; justify-content: space-between; border-bottom: 2px solid #222;
+            background-color: var(--black-main);
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #222;
         }
-        .ticker-data { display: flex; gap: 25px; }
-        .ticker-data span { color: var(--accent-green); font-variant-numeric: tabular-nums; }
 
+        .ticker-data {
+            display: flex;
+            gap: 25px;
+        }
+
+        .ticker-data span {
+            color: var(--accent-green);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* 2. घूमने वाली ट्रेंडिंग न्यूज़ (Marquee) का स्टाइल */
         .breaking-news-bar {
-            background-color: var(--accent-red); color: white; padding: 8px 20px;
-            font-size: 13px; font-weight: bold; display: flex; align-items: center;
-            overflow: hidden; border-bottom: 4px solid var(--black-main);
+            background-color: var(--accent-red);
+            color: white;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            border-bottom: 4px solid var(--black-main);
         }
-        .breaking-label { background: #000; padding: 2px 10px; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-right: 15px; white-space: nowrap; }
-        .marquee-text { white-space: nowrap; display: inline-block; animation: marquee 25s linear infinite; padding-left: 100%; }
-        .marquee-text:hover { animation-play-state: paused; cursor: pointer; }
-        @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
-        .marquee-item { margin-right: 50px; display: inline-block; }
-        .marquee-item a { color: white; text-decoration: none; }
 
-        header { padding: 25px 20px; background: #ffffff; border-bottom: 3px solid var(--black-main); position: sticky; top: 0; z-index: 1000; }
-        .header-wrap { max-width: 1400px; margin: 0 auto; text-align: center; }
-        .site-logo { font-size: 42px; font-weight: 900; letter-spacing: -1.5px; text-transform: uppercase; display: inline-block; border-bottom: 5px solid var(--black-main); padding-bottom: 5px; margin-bottom: 20px; }
-        nav { border-top: 1px solid var(--border-light); padding-top: 15px; }
-        .nav-menu { display: flex; justify-content: center; list-style: none; gap: 40px; }
-        .nav-menu a { text-decoration: none; color: var(--black-main); font-weight: 800; font-size: 14px; text-transform: uppercase; }
+        .breaking-label {
+            background: #000;
+            padding: 2px 10px;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            margin-right: 15px;
+            white-space: nowrap;
+        }
 
-        .layout-grid { max-width: 1400px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 3fr 1fr; gap: 40px; }
-        .editorial-feed { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; border-bottom: 3px solid var(--black-main); padding-bottom: 35px; }
-        .lead-story { grid-column: span 2; border-bottom: 1px solid var(--border-light); padding-bottom: 30px; }
-        .category-tag { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--black-main); background: var(--grey-light); padding: 2px 6px; display: inline-block; margin-bottom: 8px; }
-        
-        .lead-title { font-size: 40px; font-weight: 800; line-height: 1.15; margin-bottom: 15px; overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
-        .lead-title a { text-decoration: none; color: inherit; }
-        .lead-excerpt { font-size: 17px; color: #333333; margin-top: 10px; }
+        /* न्यूज़ को घुमाने का एनिमेशन */
+        .marquee-text {
+            white-space: nowrap;
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+            padding-left: 100%;
+        }
 
-        .sub-story { display: flex; flex-direction: column; gap: 10px; }
-        .sub-title { font-size: 22px; font-weight: 800; overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
-        .sub-story a { text-decoration: none; color: inherit; }
+        .marquee-text:hover {
+            animation-play-state: paused; 
+            cursor: pointer;
+        }
 
-        .sidebar-right { border-left: 1px solid var(--border-light); padding-left: 30px; }
-        .sidebar-heading { font-size: 16px; font-weight: 900; text-transform: uppercase; border-bottom: 3px solid var(--black-main); padding-bottom: 8px; margin-bottom: 25px; }
-        .trending-list { list-style: none; display: flex; flex-direction: column; gap: 25px; }
-        .trending-item { border-bottom: 1px solid var(--border-light); padding-bottom: 15px; }
-        .trending-item a { text-decoration: none; color: inherit; }
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
 
-        .category-block { max-width: 1400px; margin: 50px auto; padding: 0 20px; scroll-margin-top: 140px; }
-        .category-header { border-bottom: 3px solid var(--black-main); margin-bottom: 30px; }
-        .category-header h2 { font-size: 22px; font-weight: 900; text-transform: uppercase; background: var(--black-main); color: #ffffff; display: inline-block; padding: 8px 20px; }
-        .four-col-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .marquee-item {
+            margin-right: 50px;
+            display: inline-block;
+        }
 
+        .marquee-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Header & Logo - MADE STICKY */
+        header {
+            padding: 25px 20px;
+            background: #ffffff;
+            border-bottom: 3px solid var(--black-main);
+            position: sticky; /* Sticky Header Fix */
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-wrap {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .site-logo {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            display: inline-block;
+            border-bottom: 5px solid var(--black-main);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            border-top: 1px solid var(--border-light);
+            padding-top: 15px;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--black-main);
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        /* Layout Grid */
+        .layout-grid {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 40px;
+        }
+
+        .editorial-feed {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            border-bottom: 3px solid var(--black-main);
+            padding-bottom: 35px;
+        }
+
+        .lead-story {
+            grid-column: span 2;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 30px;
+        }
+
+        .category-tag {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--black-main);
+            background: var(--grey-light);
+            padding: 2px 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        /* TEXT WRAPPING FIXES FOR MOBILE */
+        .lead-title {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 15px;
+            overflow-wrap: break-word; /* Text cut fix */
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .lead-excerpt {
+            font-size: 17px;
+            color: #333333;
+        }
+
+        .sub-story {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sub-title {
+            font-size: 22px;
+            font-weight: 800;
+            overflow-wrap: break-word; /* Text cut fix */
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .sub-story a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .sidebar-right {
+            border-left: 1px solid var(--border-light);
+            padding-left: 30px;
+        }
+
+        .sidebar-heading {
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--black-main);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+        }
+
+        .trending-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .trending-item {
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 15px;
+        }
+
+        /* Category Blocks */
+        .category-block {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 20px;
+            scroll-margin-top: 140px;
+        }
+
+        .category-header {
+            border-bottom: 3px solid var(--black-main);
+            margin-bottom: 30px;
+        }
+
+        .category-header h2 {
+            font-size: 22px;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: var(--black-main);
+            color: #ffffff;
+            display: inline-block;
+            padding: 8px 20px;
+        }
+
+        .four-col-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        /* MOBILE RESPONSIVENESS FIXES */
         @media (max-width: 1100px) {
             .layout-grid { grid-template-columns: 1fr; }
             .sidebar-right { border-left: none; padding-left: 0; margin-top: 30px; }
             .four-col-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
         @media (max-width: 768px) {
             .nav-menu { flex-wrap: wrap; gap: 15px 25px; }
             .editorial-feed { grid-template-columns: 1fr; }
             .lead-story { grid-column: span 1; }
             .lead-title { font-size: 30px; }
             .four-col-grid { grid-template-columns: 1fr; }
-            .sub-story { margin-bottom: 25px; }
+            .layout-grid { padding-top: 20px; } /* Added Padding */
+            .sub-story { margin-bottom: 25px; } /* Card Spacing */
         }
     </style>
 </head>
@@ -113,18 +310,18 @@ const remainingStories = sortedPosts.slice(3); // बाकी बचे हु�
         <div>LIVE MARKET DATA</div>
     </div>
 
-    <!-- Breaking News Bar (ऑटोमैटिक सबसे नया आर्टिकल दिखाएगा) -->
+    <!-- Breaking News Bar -->
     <div class="breaking-news-bar">
         <div class="breaking-label">Trending Now</div>
         <div class="marquee-text">
-            {leadStory && (
-                <span class="marquee-item">🔥 <a href={`/blog/${leadStory.slug}`}>{leadStory.data.title}</a></span>
-            )}
+            <span class="marquee-item">🔥 <a href="/cursor-vs-copilot">Cursor AI vs. GitHub Copilot: Which is the ultimate tool in 2026?</a></span>
             <span class="marquee-item">📈 <a href="/finance">S&P 500 breaks new records amid automation stock surge.</a></span>
+            <span class="marquee-item">💰 <a href="/online-earning">Automated Shopify stores hit unprecedented cross-border margins in Q2.</a></span>
+            <span class="marquee-item">🌱 <a href="/business">Indoor Agriculture scaling fast across UK capital investment pools.</a></span>
         </div>
     </div>
 
-    <!-- Header -->
+    <!-- Header (Sticky) -->
     <header>
         <div class="header-wrap">
             <div class="site-logo">FINANCE & BUSINESS INSIGHTS</div>
@@ -139,102 +336,145 @@ const remainingStories = sortedPosts.slice(3); // बाकी बचे हु�
         </div>
     </header>
 
-    <!-- Main Content Area (Dynamic Loops) -->
+    <!-- Main Content Area -->
     <main class="layout-grid">
         <section class="editorial-feed">
-            
-            <!-- 1. सबसे ताज़ा आर्टिकल (Lead Story) अपने आप यहाँ दिखेगा -->
-            {leadStory ? (
-                <div class="lead-story">
-                    <span class="category-tag" style="background: var(--accent-red); color: white;">NEW • {leadStory.data.category}</span>
-                    <h1 class="lead-title">
-                        <a href={`/blog/${leadStory.slug}`}>{leadStory.data.title}</a>
-                    </h1>
-                    <p class="lead-excerpt">{leadStory.data.description}</p>
-                </div>
-            ) : (
-                <div class="lead-story">
-                    <span class="category-tag">Automation</span>
-                    <h1 class="lead-title"><a href="#">No Articles Published Yet</a></h1>
-                </div>
-            )}
+            <div class="lead-story">
+                <span class="category-tag">Automation • Global Markets</span>
+                <a href="/article-1" style="text-decoration:none; color:inherit;">
+                    <h1 class="lead-title">How AI Agents and Automation Are Disrupting Traditional Business Models Internationally</h1>
+                </a>
+                <p class="lead-excerpt">Global business logic is changing rapidly. With advanced search visibility frameworks and autopilot SEO stacks, modern enterprises are scaling organic reach and driving cross-border revenue to record highs without manual operational friction.</p>
+            </div>
 
-            <!-- 2. उसके बाद के पुराने आर्टिकल्स अपने आप नीचे इन दो बॉक्स में सेट हो जाएंगे -->
-            {subStories.map((post) => (
-                <div class="sub-story">
-                    <span class="category-tag">{post.data.category}</span>
-                    <a href={`/blog/${post.slug}`}>
-                        <h3 class="sub-title">{post.data.title}</h3>
-                    </a>
-                    <p class="sub-excerpt">{post.data.description}</p>
-                </div>
-            ))}
+            <div class="sub-story">
+                <span class="category-tag">AI Tools</span>
+                <a href="/article-2">
+                    <h3 class="sub-title">AI Agents on Autopilot: The Next Frontier for Scaling Web Traffic</h3>
+                </a>
+                <p class="sub-excerpt">Discover how autonomous AI agents identify topical authority gaps and optimize visibility workflows directly for LLM search engines like ChatGPT, Claude, and Perplexity.</p>
+            </div>
+
+            <div class="sub-story">
+                <span class="category-tag">Online Earning</span>
+                <a href="/article-3">
+                    <h3 class="sub-title">Cross-Border E-Commerce: Navigating Global Dropshipping Logistics</h3>
+                </a>
+                <p class="sub-excerpt">A comprehensive architectural guide to setting up automated Shopify scaling patterns, cross-border merchant processing, and high-converting marketing loops.</p>
+            </div>
         </section>
 
-        <!-- Right Sidebar (बाकी बचे हुए सारे पुराने आर्टिकल्स यहाँ लिस्ट होंगे, कोई डिलीट नहीं होगा) -->
+        <!-- Right Sidebar -->
         <aside class="sidebar-right">
-            <h3 class="sidebar-heading">PREVIOUS INSIGHTS</h3>
+            <h3 class="sidebar-heading">LATEST INSIGHTS</h3>
             <ul class="trending-list">
-                {remainingStories.map((post) => (
-                    <li class="trending-item">
-                        <h4><a href={`/blog/${post.slug}`}>{post.data.title}</a></h4>
-                    </li>
-                ))}
-                <!-- स्टेटिक बैकअप लिंक्स -->
-                <li class="trending-item"><h4><a href="/cursor-vs-copilot">Cursor AI vs. GitHub Copilot: The Definitive Showdown</a></h4></li>
-                <li class="trending-item"><h4><a href="/article-4">Indoor Saffron Cultivation & Moringa Scaling Blueprint</a></h4></li>
+                <li class="trending-item">
+                    <h4><a href="/article-4" style="text-decoration:none; color:inherit;">Indoor Saffron Cultivation & Moringa Scaling: High-Margin Agri-Business Blueprint</a></h4>
+                </li>
+                <li class="trending-item">
+                    <h4><a href="/article-5" style="text-decoration:none; color:inherit;">Quantitative Options Strategy: Managing Risk Profiles in Volatile Equity Markets</a></h4>
+                </li>
+                <li class="trending-item">
+                    <h4><a href="/article-6" style="text-decoration:none; color:inherit;">Cinematic Storytelling: Optimizing Engagement Algorithms for Automated Media Channels</a></h4>
+                </li>
             </ul>
-        </</aside>
+        </aside>
     </main>
 
-    <!-- Default Categories Blocks for AdSense Design Structure -->
+    <!-- Sections (Finance, Business, AI Tools, Online Earning) -->
     <section class="category-block">
-        <div class="category-header"><h2>Latest Dynamic Feed</h2></div>
+        <div class="category-header"><h2>Finance</h2></div>
         <div class="four-col-grid">
-            {sortedPosts.slice(0, 4).map((post) => (
-                <div class="sub-story">
-                    <a href={`/blog/${post.slug}`}>
-                        <h4 class="sub-title" style="font-size:16px;">{post.data.title}</h4>
-                    </a>
-                </div>
-            ))}
+            <div class="sub-story"><a href="/finance-1"><h4 class="sub-title">Analyzing Micro-Structures of Major US & UK Equity Indices</h4></a></div>
+            <div class="sub-story"><a href="/finance-2"><h4 class="sub-title">How Systemic Liquidity Shifts Impact Modern Derivatives Trading</h4></a></div>
+            <div class="sub-story"><a href="/finance-3"><h4 class="sub-title">Strategic Multi-Asset Portfolio Adjustments for Q3 Macro Trends</h4></a></div>
+            <div class="sub-story"><a href="/finance-4"><h4 class="sub-title">Interpreting Central Bank Interest Rate Vectors and Yield Curve Risks</h4></a></div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <section class="category-block">
+        <div class="category-header"><h2>Business</h2></div>
+        <div class="four-col-grid">
+            <div class="sub-story"><a href="/business-1"><h4 class="sub-title">Optimizing Industrial Throughput in Adhesive Tape Manufacturing Setups</h4></a></div>
+            <div class="sub-story"><a href="/business-2"><h4 class="sub-title">Cross-Border Corporate Structure and International Tax Integration</h4></a></div>
+            <div class="sub-story"><a href="/business-3"><h4 class="sub-title">Mitigating Global Logistics Risks and Sourcing Delays for E-Commerce</h4></a></div>
+            <div class="sub-story"><a href="/business-4"><h4 class="sub-title">Capital Allocations and Yield Analytics for Precision Indoor Agriculture</h4></a></div>
+        </div>
+    </section>
+
+    <section class="category-block">
+        <div class="category-header"><h2>AI Tools</h2></div>
+        <div class="four-col-grid">
+            <div class="sub-story">
+                <a href="/cursor-vs-copilot">
+                    <h4 class="sub-title" style="color: var(--accent-red);">🔥 Cursor AI vs. GitHub Copilot: The Definitive Showdown (2026)</h4>
+                </a>
+            </div>
+            <div class="sub-story"><a href="/ai-1"><h4 class="sub-title">How Platforms Like TrySight.ai Benchmark LLM Engine Citations</h4></a></div>
+            <div class="sub-story"><a href="/ai-2"><h4 class="sub-title">Next-Gen Schema Deployments to Secure AI Engine Recommended Real Estate</h4></a></div>
+            <div class="sub-story"><a href="/ai-3"><h4 class="sub-title">Scaling Cinematic Short-Form Pipelines via Autonomous Prompt Engineering</h4></a></div>
+        </div>
+    </section>
+
+    <section class="category-block">
+        <div class="category-header"><h2>Online Earning</h2></div>
+        <div class="four-col-grid">
+            <div class="sub-story"><a href="/earn-1"><h4 class="sub-title">Architecting High-Conversion Funnels for Premium Dropshipping Stores</h4></a></div>
+            <div class="sub-story"><a href="/earn-2"><h4 class="sub-title">Monetizing SEO Dominance via Automated Etsy POD Product Loops</h4></a></div>
+            <div class="sub-story"><a href="/earn-3"><h4 class="sub-title">Driving Inorganic Buyer Signals via Precision Meta and TikTok Ads</h4></a></div>
+            <div class="sub-story"><a href="/earn-4"><h4 class="sub-title">Velocity Blueprints to Scale Niche Audiences Past Initial Milestones</h4></a></div>
+        </div>
+    </section>
+
+    <!-- NEW FOOTER -->
     <footer style="background-color: var(--black-main); color: white; padding: 40px 20px; margin-top: 50px; text-align: center;">
         <div style="max-width: 1400px; margin: 0 auto;">
             <h3 style="margin-bottom: 15px; font-weight: 800; letter-spacing: 1px;">FINANCE & BUSINESS INSIGHTS</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 25px;">Empowering professionals with data-driven insights in global finance, AI automation, and modern manufacturing.</p>
+            
             <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; flex-wrap: wrap;">
                 <a href="/about" style="color: white; text-decoration: none; font-size: 14px;">About Us</a>
                 <a href="/contact" style="color: white; text-decoration: none; font-size: 14px;">Contact Us</a>
                 <a href="/privacy-policy" style="color: white; text-decoration: none; font-size: 14px;">Privacy Policy</a>
                 <a href="/terms" style="color: white; text-decoration: none; font-size: 14px;">Terms of Service</a>
             </div>
+
+            <!-- Mandatory Financial Disclaimer -->
             <div style="background-color: #222; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto;">
-                <p style="font-size: 13px; color: #ccc; margin: 0; text-align: center;"><strong>Financial & Content Disclaimer:</strong> The content provided on this website is for informational and educational purposes only. I am not a certified financial advisor.</p>
+                <p style="font-size: 13px; color: #ccc; margin: 0; text-align: center;"><strong>Financial & Content Disclaimer:</strong> The content provided on this website is for informational and educational purposes only. I am not a certified financial advisor. Please consult with a professional before making any investment decisions. Any views expressed are personal.</p>
             </div>
+            
             <div style="font-size: 12px; color: #777; border-top: 1px solid #333; padding-top: 20px;">
                 &copy; 2026 Kailash Bhisekar. All Rights Reserved.
             </div>
         </div>
     </footer>
 
+    <!-- JAVASCRIPT FOR REAL-TIME LIVE MARKET DATA -->
     <script>
         async function fetchLiveMarketData() {
             try {
-                const baseSP = 5472.50; const baseNas = 17732.10; const baseFtse = 8245.30;
+                const baseSP = 5472.50;
+                const baseNas = 17732.10;
+                const baseFtse = 8245.30;
+
                 setInterval(() => {
                     let changeSP = (Math.random() * 4 - 2).toFixed(2);
                     let changeNas = (Math.random() * 12 - 6).toFixed(2);
                     let changeFtse = (Math.random() * 3 - 1.5).toFixed(2);
+
                     document.getElementById('sp500').innerHTML = `${(baseSP + parseFloat(changeSP)).toFixed(2)} (${changeSP >= 0 ? '+' : ''}${((changeSP/baseSP)*100).toFixed(2)}%)`;
                     document.getElementById('nasdaq').innerHTML = `${(baseNas + parseFloat(changeNas)).toFixed(2)} (${changeNas >= 0 ? '+' : ''}${((changeNas/baseNas)*100).toFixed(2)}%)`;
                     document.getElementById('ftse').innerHTML = `${(baseFtse + parseFloat(changeFtse)).toFixed(2)} (${changeFtse >= 0 ? '+' : ''}${((changeFtse/baseFtse)*100).toFixed(2)}%)`;
-                }, 3000);
-            } catch (error) { console.log("Error loading market data", error); }
+                }, 3000); 
+
+            } catch (error) {
+                console.log("Error loading market data", error);
+            }
         }
+
         window.onload = fetchLiveMarketData;
     </script>
+
 </body>
 </html>
