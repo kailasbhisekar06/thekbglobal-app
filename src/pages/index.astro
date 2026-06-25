@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Finance & AI Insights Platform</title>
-    <!-- Favicon Added -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <style>
         :root {
@@ -201,6 +200,11 @@
             hyphens: auto;
         }
 
+        .lead-title a {
+            text-decoration: none;
+            color: inherit;
+        }
+
         .lead-excerpt {
             font-size: 17px;
             color: #333333;
@@ -300,7 +304,6 @@
 </head>
 <body>
 
-    <!-- LIVE MARKET TICKER -->
     <div class="market-ticker">
         <div class="ticker-data">
             <div>S&P 500: <span id="sp500">Loading...</span></div>
@@ -310,18 +313,15 @@
         <div>LIVE MARKET DATA</div>
     </div>
 
-    <!-- Breaking News Bar -->
     <div class="breaking-news-bar">
         <div class="breaking-label">Trending Now</div>
         <div class="marquee-text">
-            <span class="marquee-item">🔥 <a href="/cursor-vs-copilot">Cursor AI vs. GitHub Copilot: Which is the ultimate tool in 2026?</a></span>
+            <span class="marquee-item">🔥 <a href="/blog/usa-ecommerce-trends">USA E-Commerce: Why American Buyers Crave Human Authenticity Over Automation</a></span>
+            <span class="marquee-item">💻 <a href="/cursor-vs-copilot">Cursor AI vs. GitHub Copilot: Which is the ultimate tool in 2026?</a></span>
             <span class="marquee-item">📈 <a href="/finance">S&P 500 breaks new records amid automation stock surge.</a></span>
-            <span class="marquee-item">💰 <a href="/online-earning">Automated Shopify stores hit unprecedented cross-border margins in Q2.</a></span>
-            <span class="marquee-item">🌱 <a href="/business">Indoor Agriculture scaling fast across UK capital investment pools.</a></span>
         </div>
     </div>
 
-    <!-- Header (Sticky) -->
     <header>
         <div class="header-wrap">
             <div class="site-logo">FINANCE & BUSINESS INSIGHTS</div>
@@ -336,15 +336,22 @@
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="layout-grid">
         <section class="editorial-feed">
             <div class="lead-story">
-                <span class="category-tag">Automation • Global Markets</span>
-                <a href="/article-1" style="text-decoration:none; color:inherit;">
-                    <h1 class="lead-title">How AI Agents and Automation Are Disrupting Traditional Business Models Internationally</h1>
+                <span class="category-tag" style="background: var(--accent-red); color: white;">NEW • USA Market</span>
+                <a href="/blog/usa-ecommerce-trends">
+                    <h1 class="lead-title">The Human Shift in USA E-Commerce: Why American Buyers are Craving Authenticity Over Automation</h1>
                 </a>
-                <p class="lead-excerpt">Global business logic is changing rapidly. With advanced search visibility frameworks and autopilot SEO stacks, modern enterprises are scaling organic reach and driving cross-border revenue to record highs without manual operational friction.</p>
+                <p class="lead-excerpt" style="margin-top: 10px;">An inside look at the changing behavior of shoppers in the United States, and how smaller cross-border businesses can tap into this human-centric trend to drive margins.</p>
+            </div>
+
+            <div class="sub-story">
+                <span class="category-tag">Automation • Global Markets</span>
+                <a href="/article-1">
+                    <h3 class="sub-title">How AI Agents and Automation Are Disrupting Traditional Business Models Internationally</h3>
+                </a>
+                <p class="sub-excerpt">Global business logic is changing rapidly. Modern enterprises are scaling organic reach and driving cross-border revenue without manual friction.</p>
             </div>
 
             <div class="sub-story">
@@ -352,19 +359,10 @@
                 <a href="/article-2">
                     <h3 class="sub-title">AI Agents on Autopilot: The Next Frontier for Scaling Web Traffic</h3>
                 </a>
-                <p class="sub-excerpt">Discover how autonomous AI agents identify topical authority gaps and optimize visibility workflows directly for LLM search engines like ChatGPT, Claude, and Perplexity.</p>
-            </div>
-
-            <div class="sub-story">
-                <span class="category-tag">Online Earning</span>
-                <a href="/article-3">
-                    <h3 class="sub-title">Cross-Border E-Commerce: Navigating Global Dropshipping Logistics</h3>
-                </a>
-                <p class="sub-excerpt">A comprehensive architectural guide to setting up automated Shopify scaling patterns, cross-border merchant processing, and high-converting marketing loops.</p>
+                <p class="sub-excerpt">Discover how autonomous AI agents identify topical authority gaps and optimize visibility workflows directly for LLM search engines.</p>
             </div>
         </section>
 
-        <!-- Right Sidebar -->
         <aside class="sidebar-right">
             <h3 class="sidebar-heading">LATEST INSIGHTS</h3>
             <ul class="trending-list">
@@ -381,7 +379,6 @@
         </aside>
     </main>
 
-    <!-- Sections (Finance, Business, AI Tools, Online Earning) -->
     <section class="category-block">
         <div class="category-header"><h2>Finance</h2></div>
         <div class="four-col-grid">
@@ -419,14 +416,13 @@
     <section class="category-block">
         <div class="category-header"><h2>Online Earning</h2></div>
         <div class="four-col-grid">
+            <div class="sub-story"><a href="/blog/usa-ecommerce-trends"><h4 class="sub-title" style="color: var(--accent-green);">🇺🇸 USA E-Commerce: Consumer Behavior Insights</h4></a></div>
+            <div class="sub-story"><a href="/article-3"><h4 class="sub-title">Cross-Border E-Commerce: Navigating Global Dropshipping Logistics</h4></a></div>
             <div class="sub-story"><a href="/earn-1"><h4 class="sub-title">Architecting High-Conversion Funnels for Premium Dropshipping Stores</h4></a></div>
             <div class="sub-story"><a href="/earn-2"><h4 class="sub-title">Monetizing SEO Dominance via Automated Etsy POD Product Loops</h4></a></div>
-            <div class="sub-story"><a href="/earn-3"><h4 class="sub-title">Driving Inorganic Buyer Signals via Precision Meta and TikTok Ads</h4></a></div>
-            <div class="sub-story"><a href="/earn-4"><h4 class="sub-title">Velocity Blueprints to Scale Niche Audiences Past Initial Milestones</h4></a></div>
         </div>
     </section>
 
-    <!-- NEW FOOTER -->
     <footer style="background-color: var(--black-main); color: white; padding: 40px 20px; margin-top: 50px; text-align: center;">
         <div style="max-width: 1400px; margin: 0 auto;">
             <h3 style="margin-bottom: 15px; font-weight: 800; letter-spacing: 1px;">FINANCE & BUSINESS INSIGHTS</h3>
@@ -439,7 +435,6 @@
                 <a href="/terms" style="color: white; text-decoration: none; font-size: 14px;">Terms of Service</a>
             </div>
 
-            <!-- Mandatory Financial Disclaimer -->
             <div style="background-color: #222; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto;">
                 <p style="font-size: 13px; color: #ccc; margin: 0; text-align: center;"><strong>Financial & Content Disclaimer:</strong> The content provided on this website is for informational and educational purposes only. I am not a certified financial advisor. Please consult with a professional before making any investment decisions. Any views expressed are personal.</p>
             </div>
@@ -450,7 +445,6 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT FOR REAL-TIME LIVE MARKET DATA -->
     <script>
         async function fetchLiveMarketData() {
             try {
