@@ -11,8 +11,7 @@ Cricket fans, the wait is finally over! A brand new, highly anticipated cycle fo
 
 In the opening clash of the 2026 bilateral series against Ireland, India's newly appointed captain Shreyas Iyer won a crucial toss under typical overcast Irish conditions and made the calculated decision to bowl first. With the ball expected to swing early on, the Indian management is keen to unleash their young, hungry bowling attack to rattle the hosts on their home turf.
 
-<!-- IMAGE 1 PLACEHOLDER -->
-![India vs Ireland T20 2026 Toss](/ind-vs-ire-main.jpg)
+<img src="/ind-vs-ire-main.jpg" alt="India vs Ireland T20 2026 Toss" style="width:100%; border-radius:8px; margin:20px 0;" />
 
 ## Overcast Belfast Skies: Why Shreyas Iyer Chose to Bowl First
 
@@ -22,12 +21,11 @@ By opting to bowl first, India wants to fully exploit the fresh, green pitch dur
 
 ## The New-Look Indian Squad: A Perfect Blend of Youth and Aggression
 
-This series isn't just another bilateral tournament; it marks a major structural shift in India’s T20 blueprint. With several senior players rested or transitioning into formats, the spotlight has completely shifted toward the younger generation of IPL superstars and domestic heavyweights who have been knocking on the national selectors' doors for months.
+This series isn't just another bilateral tournament; it marks a major structural shift in India’s T20 blueprint. With several senior players rested or transitioning into longer formats, the spotlight has completely shifted toward the younger generation of IPL superstars and domestic heavyweights who have been knocking on the national selectors' doors for months.
 
 The playing eleven selected for today’s match features an incredibly exciting mix of raw pace, dynamic all-rounders, and fearless top-order batsmen. Fans are particularly thrilled to see young pace sensations getting an immediate opportunity to test their skills in challenging, seam-friendly European environments. For these young men, wearing the blue jersey today is a golden opportunity to cement their spots for the upcoming global tournaments.
 
-<!-- IMAGE 2 PLACEHOLDER -->
-![Young Indian Cricket Team Celebration](/ind-team-youth.jpg)
+<img src="/ind-team-youth.jpg" alt="Young Indian Cricket Team Celebration" style="width:100%; border-radius:8px; margin:20px 0;" />
 
 ## Ireland’s Dangerous Home Advantage: Why the Hosts Cannot Be Taken Lightly
 
@@ -35,8 +33,7 @@ While India enters the contest as the heavy statistical favorite, playing Irelan
 
 The Irish top order features experienced short-format specialists who can dismantle any bowling lineup if they find their rhythm early on. Their game plan will be to absorb the initial pressure from the Indian speedsters, secure a stable partnership in the middle overs, and then use their powerful lower-order hitters to post a highly competitive, fighting total on the board.
 
-<!-- IMAGE 3 PLACEHOLDER -->
-![Ireland Batsman Hitting a Six](/ireland-batsman-action.jpg)
+<img src="/ireland-batsman-action.jpg" alt="Ireland Batsman Hitting a Six" style="width:100%; border-radius:8px; margin:20px 0;" />
 
 ## Key Player Matchups and Tactical Battles to Watch Out For
 
@@ -46,8 +43,7 @@ As the live scorecard begins to tick, several individual battles on the field wi
 * **The Spin Challenge in the Middle Overs:** How the Irish batsmen handle India’s tactical spinners on a pitch that might offer sudden, gripping turn will decide the momentum of the game between overs 7 and 15.
 * **Shreyas Iyer’s Captaincy Tactics:** All eyes are on Iyer's on-field field placements, sudden bowling changes, and how he manages his young resources under high-pressure situations.
 
-<!-- IMAGE 4 PLACEHOLDER -->
-......![Cricket Stadium Under Floodlights](/cricket-stadium-lights.jpg)
+<img src="/cricket-stadium-lights.jpg" alt="Cricket Stadium Under Floodlights" style="width:100%; border-radius:8px; margin:20px 0;" />
 
 ## What This Series Means for the Future of International T20s
 
