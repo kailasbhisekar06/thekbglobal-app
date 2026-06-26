@@ -1,6 +1,6 @@
 ---
 title: "India vs Ireland 1st T20I Live Score 2026: Shreyas Iyer Wins Toss, Opts to Bowl First as India’s New T20 Era Begins in Belfast"
-publishDate: 2026-06-26
+publishDate: 2026-06-25
 description: "Catch the live updates, scorecard breakdown, and key highlights of India vs Ireland 1st T20I 2026. Shreyas Iyer leads a refreshed, young Indian side under overcast skies in Ireland."
 image: "/ind-vs-ire-main.jpg"
 category: "Business"
